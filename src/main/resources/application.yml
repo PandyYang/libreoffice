@@ -1,0 +1,22 @@
+jodconverter:
+  local:
+    enabled: true
+    office-home: "H:/LibreOffice"
+    port-numbers: 8100,8101,8102
+    max-tasks-per-process: 100
+#  online:
+#    enabled: true
+#    url: "http://127.0.0.1:2002"
+#    # 临时文件的存放目录
+#    working-dir: "D:/IdeaProjects/libreoffice/src/main/resources/online"
+  store:
+    path: "F:/IdeaProjects/libre-office/src/main/resources/local"
+spring:
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 100MB
+  freemarker:
+    suffix: .html
+  resources:
+    static-locations: classpath:/templates/,classpath:/static/
