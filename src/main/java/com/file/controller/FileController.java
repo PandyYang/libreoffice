@@ -7,22 +7,44 @@ import com.common.util.HttpClientUtil;
 import com.file.constant.FileConstant;
 import com.file.dto.FileConvertResultDTO;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.file.read.ReadFileService;
+import lombok.val;
+import org.jodconverter.DocumentConverter;
+import org.jodconverter.office.OfficeException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping(value="")
 public class FileController {
+
+  @Autowired
+  private ReadFileService readFileService;
+
+  @Autowired
+  private DocumentConverter documentConverter;
+
+  @GetMapping(value = "/go")
+  public void go(@RequestParam String filePath) throws IOException {
+    val readfile = readFileService.readfile(filePath);
+    for (int i = 0; i< readfile.size(); i++) {
+      File file = new File(readfile.get(i).toString());
+      File targetFile = new File("C:\\Users\\Administrator\\OneDrive\\桌面\\321\\" + file.getName() + ".pdf");
+      try {
+        documentConverter.convert(file).to(targetFile).execute();
+      } catch (OfficeException e) {
+        e.printStackTrace();
+      }
+    }
+  }
 
   @GetMapping(value="/")
   public String gotoUpload(){

@@ -2,15 +2,15 @@ jodconverter:
   local:
     enabled: true
     office-home: "H:/LibreOffice"
-    port-numbers: 8100,8101,8102
-    max-tasks-per-process: 100
+    port-numbers: 8100,8101,8102,8103,8104,8105,8106,8107,8108,8109,8110,8111,8112,8113,8114,8115,8116,8117,8118,8119,8120
+    max-tasks-per-process: 10000
 #  online:
 #    enabled: true
 #    url: "http://127.0.0.1:2002"
 #    # 临时文件的存放目录
 #    working-dir: "D:/IdeaProjects/libreoffice/src/main/resources/online"
   store:
-    path: "F:/IdeaProjects/libre-office/src/main/resources/local"
+    path: "C:/Users/Administrator/OneDrive/桌面/321"
 spring:
   servlet:
     multipart:
