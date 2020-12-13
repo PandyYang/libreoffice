@@ -1,21 +1,25 @@
 jodconverter:
-  local:
-    enabled: true
-    office-home: "H:/LibreOffice"
-    port-numbers: 8100,8101,8102,8103,8104,8105,8106,8107,8108,8109,8110,8111,8112,8113,8114,8115,8116,8117,8118,8119,8120
-    max-tasks-per-process: 10000
-#  online:
+#  local:
 #    enabled: true
-#    url: "http://127.0.0.1:2002"
-#    # 临时文件的存放目录
-#    working-dir: "D:/IdeaProjects/libreoffice/src/main/resources/online"
+#    office-home: "H:/LibreOffice"
+#    port-numbers: 8100,8101,8102
+#    max-tasks-per-process: 10000
+  online:
+    enabled: true
+    url: "http://192.168.0.118:9980/"
+#     临时文件的存放目录
+    working-dir: "F:/IdeaProjects/libre-office/src/main/resources/temp"
+    pool-size: 50
+    task-execution-timeout: 600000
+    task-queue-timeout: 600000
   store:
-    path: "C:/Users/Administrator/OneDrive/桌面/321"
+    path: "F:/IdeaProjects/libre-office/src/main/resources/local"
 spring:
   servlet:
     multipart:
-      max-file-size: 50MB
-      max-request-size: 100MB
+      max-file-size: 1000MB
+      max-request-size: 1000MB
+      enabled: true
   freemarker:
     suffix: .html
   resources:

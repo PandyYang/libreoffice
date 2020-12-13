@@ -262,5 +262,23 @@ public class FileUtil extends FileUtils {
   }
 
 
+  public static void reName(String path, String from, String to) {
+    File f = new File(path);
+    File[] fs = f.listFiles();
+
+    for (int i = 0; i < fs.length; ++i) {
+      File f2 = fs[i];
+
+      if (f2.isDirectory()) {
+        reName(f2.getPath(), from, to);
+      } else {
+        String name = f2.getName();
+        if (name.endsWith(from)) {
+          f2.renameTo(new File(f2.getParent() + "/" + name.substring(0, name.indexOf(from)) + to));
+        }
+      }
+    }
+  }
+
 
 }

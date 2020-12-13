@@ -55,11 +55,18 @@ public class PreviewServiceImpl implements PreviewService {
       fileExt = fileExt.toLowerCase();
       fileName = FileUtil.getWithoutExtension(fileName);
       String targetFileExt = getTargetFileExt(fileExt);
+      System.out.println("libreOffice开始转换..............................");
+      Long startTime = System.currentTimeMillis();
       File targetFile = new File(storePath+ FileUtil.SLASH_ONE + fileName + FileUtil.DOT + targetFileExt);
       documentConverter.convert(in).as(DefaultDocumentFormatRegistry.getFormatByExtension(fileExt))
           .to(targetFile).as(DefaultDocumentFormatRegistry.getFormatByExtension(targetFileExt)).execute();
       fileConvertResultDTO.setStatus("success");
       fileConvertResultDTO.setTargetFileName(targetFile.getName());
+      System.out.println("转换结束。。。。。");
+      //转换时间
+      long endTime = System.currentTimeMillis();
+      long time = endTime - startTime;
+      System.out.println("libreOffice转换所用时间为：" + time);
     } catch (OfficeException e) {
       log.error("convertInputStream2pdf error : " + e.getMessage(),e);
       fileConvertResultDTO.setStatus("fail");
